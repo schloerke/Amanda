@@ -274,7 +274,7 @@
    * @param {string} validatorName
    * @param {object} templateData
    */
-  Validation.prototype.renderErrorMessage = function(validatorName, templateData) {
+  Validation.prototype.renderErrorMessage = function(validatorName, templateData, callbackMessage) {
 
     // Gets an error message
     var errorMessage = this.messages[validatorName];
@@ -296,7 +296,7 @@
       return errorMessage.replace(/\s+/g, ' ');
     }
 
-    return '';
+    return callbackMessage || '';
 
   };
 
@@ -336,7 +336,7 @@
           property: property,
           propertyValue: propertyValue,
           validator: propertyValidators[validatorName]
-        });
+        }, error);
 
         // Add a new error
         self.Errors.addError({
